@@ -30,7 +30,7 @@ match user_gender:
     case "nonbinary":
         sys.exit("404: gender not found") 
 
-user_bdy_count = input("\nWhat is your bodycount?")
+user_bdy_count = int(input("\nWhat is your bodycount?"))
 if user_bdy_count >= 5 and isAdult == False:
     print("Wowza, this early?")
     isHoe = True
