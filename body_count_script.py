@@ -3,10 +3,10 @@ import random
 import sys
 from datetime import datetime
 
-print(ascii_banner)
 
 user_age = 0
 user_bdy_count = 0
+user_bdy_weight = 0
 isHoe = False
 isAdult = False
 cur_date = datetime.now().date().strftime("%d/%m/%Y")
@@ -21,7 +21,7 @@ if user_age >= 18:
 else:
     print("User is underage!")
 
-user_gender = input("Enter your gender")
+user_gender = input("Enter your gender").lower()
 match user_gender:
     case "male":
         print("Hello king!")
@@ -30,9 +30,29 @@ match user_gender:
     case "nonbinary":
         sys.exit("404: gender not found") 
 
-user_bdy_count = int(input("\nWhat is your bodycount?"))
+user_bdy_count = int(input("\nEnter your bodycount:"))
+user_bdy_weight = float(input("Enter your weight:"))
+pick_conversion = input("American or foreign units?").lower()
+def convert_weight(weight, unit):
+    global user_bdy_weight
+    if unit == "american".lower():
+        user_bdy_weight = weight * 0.453592
+        return user_bdy_weight
+    elif unit == "foreign".lower():
+        user_bdy_weight = weight * 2.20462
+        return user_bdy_weight
+    else:
+        raise ValueError("Invalid unit. Please choose 'pounds' or 'foreign units'.") 
+    
+print(f'user_bdy_count: {user_bdy_count}')      
+print(f'user_bdy_weight: {user_bdy_weight}')      
+
 if user_bdy_count >= 5 and isAdult == False:
     print("Wowza, this early?")
     isHoe = True
 if user_bdy_count >= 5 and isAdult == True:
     print("Wowza, at least you're a adult")
+if user_bdy_count >= 5 and user_bdy_weight >= 200:
+    print("How?")
+if user_bdy_count >= 5 and user_bdy_weight >= 200 and isAdult == False:
+    print("How? And you're underage? Someone call Dr. Phil!")
